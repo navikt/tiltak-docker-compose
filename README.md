@@ -11,7 +11,7 @@ docker compose up -d
 ```
 for å kjøre som daemons.
 
-## Start f eks opensearch
+## Start en enkelt container
 ```
 docker compose up opensearch
 ```
