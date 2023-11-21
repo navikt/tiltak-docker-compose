@@ -166,37 +166,46 @@ services:
       KAFKA_REST_LISTENERS: "http://0.0.0.0:8082"
       KAFKA_REST_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
 
-  postgres1:
+  postgres-avtale:
     image: postgres:latest
     environment:
       POSTGRES_USER: sample
       POSTGRES_PASSWORD: sample
       POSTGRES_DB: sample
     volumes:
-      - /tmp/dbdata1:/var/lib/postgresql/data
+      - /tmp/dbdata-avtale:/var/lib/postgresql/data
     ports:
       - 6432:5432
-  postgres2:
+  postgres-refusjon:
     image: postgres:latest
     environment:
       POSTGRES_USER: sample
       POSTGRES_PASSWORD: sample
       POSTGRES_DB: sample
     volumes:
-      - /tmp/dbdata2:/var/lib/postgresql/data
+      - /tmp/dbdata-refusjon:/var/lib/postgresql/data
     ports:
       - 7432:5432
-  postgres3:
+  postgres-okonomi:
     image: postgres:latest
     environment:
       POSTGRES_USER: sample
       POSTGRES_PASSWORD: sample
       POSTGRES_DB: sample
     volumes:
-      - /tmp/dbdata3:/var/lib/postgresql/data
+      - /tmp/dbdata-okonomi:/var/lib/postgresql/data
     ports:
       - 8432:5432
-
+  postgres-notifikasjon:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: sample
+      POSTGRES_PASSWORD: sample
+      POSTGRES_DB: sample
+    volumes:
+      - /tmp/dbdata-notifikasjon:/var/lib/postgresql/data
+    ports:
+      - 9432:5432
   opensearch:
     image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-latest}
     container_name: opensearch
