@@ -42,6 +42,7 @@ services:
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker:29092'
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:1337
 
+# TRENGER IKKE?
   connect:
     image: cnfldemos/cp-server-connect-datagen:0.6.2-7.5.0
     hostname: connect
@@ -72,6 +73,7 @@ services:
       CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
       CONNECT_LOG4J_LOGGERS: org.apache.zookeeper=ERROR,org.I0Itec.zkclient=ERROR,org.reflections=ERROR
 
+#TRENGER IKKE?
   control-center:
     image: confluentinc/cp-enterprise-control-center:7.5.0
     hostname: control-center
@@ -96,6 +98,7 @@ services:
       CONFLUENT_METRICS_TOPIC_REPLICATION: 1
       PORT: 9021
 
+# TRENGER IKKE?
   ksqldb-server:
     image: confluentinc/cp-ksqldb-server:7.5.0
     hostname: ksqldb-server
@@ -119,6 +122,7 @@ services:
       KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: 'true'
       KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: 'true'
 
+# TRENGER IKKE?
   ksqldb-cli:
     image: confluentinc/cp-ksqldb-cli:7.5.0
     container_name: ksqldb-cli
@@ -129,6 +133,7 @@ services:
     entrypoint: /bin/sh
     tty: true
 
+# TRENGER IKKE?
   ksql-datagen:
     image: confluentinc/ksqldb-examples:7.5.0
     hostname: ksql-datagen
@@ -151,6 +156,7 @@ services:
       STREAMS_SCHEMA_REGISTRY_HOST: schema-registry
       STREAMS_SCHEMA_REGISTRY_PORT: 8081
 
+# TRENGER IKKE?
   rest-proxy:
     image: confluentinc/cp-kafka-rest:7.5.0
     depends_on:
@@ -173,7 +179,8 @@ services:
       POSTGRES_PASSWORD: sample
       POSTGRES_DB: sample
     volumes:
-      - /tmp/dbdata-avtale:/var/lib/postgresql/data
+      - dbdata-avtale:/var/lib/postgresql/data
+     # - /tmp/dbdata-avtale:/var/lib/postgresql/data
     ports:
       - 6432:5432
   postgres-refusjon:
@@ -183,7 +190,8 @@ services:
       POSTGRES_PASSWORD: sample
       POSTGRES_DB: sample
     volumes:
-      - /tmp/dbdata-refusjon:/var/lib/postgresql/data
+      - dbdata-refusjon:/var/lib/postgresql/data
+#      - /tmp/dbdata-refusjon:/var/lib/postgresql/data
     ports:
       - 7432:5432
   postgres-okonomi:
@@ -193,7 +201,8 @@ services:
       POSTGRES_PASSWORD: sample
       POSTGRES_DB: sample
     volumes:
-      - /tmp/dbdata-okonomi:/var/lib/postgresql/data
+      - dbdata-okonomi:/var/lib/postgresql/data
+#      - /tmp/dbdata-okonomi:/var/lib/postgresql/data
     ports:
       - 8432:5432
   postgres-notifikasjon:
@@ -203,9 +212,12 @@ services:
       POSTGRES_PASSWORD: sample
       POSTGRES_DB: sample
     volumes:
-      - /tmp/dbdata-notifikasjon:/var/lib/postgresql/data
+      - dbdata-notifikasjon:/var/lib/postgresql/data
+#      - /tmp/dbdata-notifikasjon:/var/lib/postgresql/data
     ports:
       - 9432:5432
+
+# TRENGER IKKE?
   opensearch:
     image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-latest}
     container_name: opensearch
@@ -221,6 +233,7 @@ services:
     networks:
       - opensearch-net
 
+# TRENGER IKKE?
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:${OPENSEARCH_DASHBOARDS_VERSION:-latest}
     container_name: opensearch-dashboards
@@ -238,3 +251,9 @@ services:
 networks:
   opensearch-net:
     driver: bridge
+
+volumes:
+  dbdata-avtale:
+  dbdata-refusjon:
+  dbdata-okonomi:
+  dbdata-notifikasjon:
