@@ -6,7 +6,7 @@ Oppset for å kjøre docker compose i Team Tiltak med kafka.
 
 ## Start alt
 ```
-docker-compose up --remove-orphans
+docker compose up --remove-orphans
 ``` 
 eller
 ```
